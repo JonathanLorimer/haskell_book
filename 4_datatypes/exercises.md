@@ -76,3 +76,22 @@ f x y = ((snd x, snd y), (fst x, fst y))
 ```
 
 ## Correcting Syntax
+
+#### 1.
+
+x should be in back ticks not quotes
+
+#### 2.
+
+\x -> x
+
+#### 3.
+
+f (a, b) = a
+
+## Match the function names to their types
+
+1. C
+2. B
+3. A
+4. D

@@ -13,11 +13,12 @@ instance Eq TisAnInteger where
 
 2.
 
-````haskell
+```haskell
 data TwoIntegers = Two Integer Integer
 
 instance Eq TwoIntegers where
     (==) (Two x1 x2)(Two y1 y2) = x1 == y1 && x2 == y2
+```
 
 3.
 ```haskell

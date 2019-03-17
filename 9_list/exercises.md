@@ -67,18 +67,6 @@ removeWordAndSpace = (drop 1) . dropWhile (/= ' ')
 2.
 
 ```haskell
-myWords :: String -> [String]
-myWords = go []
-    where
-        go xs [] = reverse xs
-        go xs string = go ((extractWord string):xs) $ removeWordAndSpace string
-
-extractWord :: String -> String
-extractWord = takeWhile (/= ' ')
-
-removeWordAndSpace :: String -> String
-removeWordAndSpace = (drop 1) . dropWhile (/= ' ')
-
 firstSen = "Tyger Tyger, burning bright\n"
 secondSen = "In the forests of the night\n"
 thirdSen = "What immortal hand or eye\n"
@@ -109,8 +97,8 @@ fourthSen = "Could frame thy fearful\
 \ symmetry?"
 sentences = firstSen ++ secondSen ++ thirdSen ++ fourthSen
 
-splitWordOnChar :: Char -> String -> [String]
-splitWordOnChar char = go []
+splitOnChar :: Char -> String -> [String]
+splitOnChar char = go []
     where
         go xs [] = reverse xs
         go xs string =
@@ -124,10 +112,10 @@ removeOnCharInclusive :: Char -> String -> String
 removeOnCharInclusive char = (drop 1) . dropWhile (/= char)
 
 myWords :: String -> [String]
-myWords = splitWordOnChar ' '
+myWords = splitOnChar ' '
 
 myLines :: String -> [String]
-myLines = splitWordOnChar '\n'
+myLines = splitOnChar '\n'
 ```
 
 #### Comprehend Thy Lists
@@ -317,7 +305,7 @@ decode num = map $ decodeChar num
 
 #### Writing your own standard functions
 
-1. My Or
+1.
 
 ```haskell
 myOr :: [Bool] -> Bool

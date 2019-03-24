@@ -111,8 +111,8 @@ myAny f (x:xs) = if (f x)
 myElem :: Eq a => a -> [a] -> Bool
 myElem _ [] = False
 myElem el (x:xs) = if el == x
-    then True
-    else myElem el xs
+                   then True
+                   else myElem el xs
 
 myElem' :: Eq a => a -> [a] -> Bool
 myElem' el = any (el ==)

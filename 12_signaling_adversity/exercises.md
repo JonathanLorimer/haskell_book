@@ -216,3 +216,30 @@ betterIterate f x = myUnfoldr (\y -> Just (y, f y)) x
 ```
 
 #### Finally something other than a list!
+
+1.
+
+```haskell
+-- from Maybe section
+mayybee :: b -> (a -> b) -> Maybe a -> b
+mayybee x _ Nothing = x
+mayybee _ f (Just y) = f y
+
+-- new code
+data BinaryTree a = Leaf
+                  | Node (BinaryTree a) a (BinaryTree a)
+                  deriving (Eq, Ord, Show)
+
+
+unfold :: (a -> Maybe (a,b,a)) -> a -> BinaryTree b
+unfold f a = mayybee Leaf go $ f a
+            where
+                go (a, b, a') = Node (unfold f a) b (unfold f a')
+```
+
+2.
+
+```haskell
+treeBuild :: Integer -> BinaryTree Integer
+treeBuild n = unfold (\x -> if x == n then Nothing else Just ((x + 1), x, (x + 1))) 0
+```

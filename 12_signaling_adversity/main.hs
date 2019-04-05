@@ -144,9 +144,10 @@ data BinaryTree a = Leaf
 
 
 unfold :: (a -> Maybe (a,b,a)) -> a -> BinaryTree b
-unfold f a = Node (unfold f ((getFst . f) a)) ((getSnd . f) a) (unfold f ((getThrd . f) a))
+unfold f a = mayybee Leaf go $ f a
             where
-                getFst (Just (x,y,z)) = x
-                getSnd (Just (x,y,z)) = y
-                getThrd (Just (x,y,z)) = z
-            
+                go (a, b, a') = Node (unfold f a) b (unfold f a') 
+
+
+treeBuild :: Integer -> BinaryTree Integer
+treeBuild n = unfold (\x -> if x == n then Nothing else Just ((x + 1), x, (x + 1))) 0

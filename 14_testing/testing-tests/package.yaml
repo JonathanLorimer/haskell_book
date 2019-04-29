@@ -38,7 +38,7 @@ executables:
       - testing-tests
   # addition:
   #   main: Addition.hs
-  #   source-dirs: .
+  #   source-dirs: src
   #   ghc-options:
   #     - -threaded
   #     - -rtsopts

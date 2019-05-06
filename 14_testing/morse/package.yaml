@@ -1,6 +1,6 @@
-name: testing-tests
+name: morse
 version: 0.1.0.0
-github: "jonathanlorimer/testing-tests"
+github: "jonathanlorimer/morse"
 license: BSD3
 author: "Jonathan Lorimer"
 maintainer: "jonathan_lorimer@mac.com"
@@ -17,18 +17,19 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description: Please see the README on GitHub at <https://github.com/jonathanlorimer/testing-tests#readme>
+description: Please see the README on GitHub at <https://github.com/jonathanlorimer/morse#readme>
 
 dependencies:
   - base >= 4.7 && < 5
-  - hspec
   - QuickCheck
+  - hspec
+  - containers
 
 library:
   source-dirs: src
 
 executables:
-  testing-tests-exe:
+  morse:
     main: Main.hs
     source-dirs: app
     ghc-options:
@@ -36,24 +37,15 @@ executables:
       - -rtsopts
       - -with-rtsopts=-N
     dependencies:
-      - testing-tests
-  # addition:
-  #   main: Addition.hs
-  #   source-dirs: src
-  #   ghc-options:
-  #     - -threaded
-  #     - -rtsopts
-  #     - -with-rtsopts=-N
-  #   dependencies:
-  #     - testing-tests
+      - morse
 
 tests:
-  testing-tests-test:
-    main: Spec.hs
+  morse-test:
+    main: Main.hs
     source-dirs: test
     ghc-options:
       - -threaded
       - -rtsopts
       - -with-rtsopts=-N
     dependencies:
-      - testing-tests
+      - morse

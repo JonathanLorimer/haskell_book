@@ -16,6 +16,11 @@ instance Arbitrary a => Arbitrary (Maybs a) where
 newtype First a = First { getFirst :: Maybs a } 
                    deriving (Eq, Show)
 
+instance Arbitrary a => Arbitrary (First a) where
+    arbitrary = do
+        a <- arbitrary
+        return (First a)
+
 instance Semigroup (First a) where
     (<>) x@(First (Something _)) _ = x
     (<>) (First Not) x = x

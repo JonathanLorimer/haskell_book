@@ -23,6 +23,7 @@ dependencies:
   - base >= 4.7 && < 5
   - QuickCheck
   - checkers
+  - hspec
 
 library:
   source-dirs: src
@@ -37,14 +38,20 @@ executables:
       - -with-rtsopts=-N
     dependencies:
       - applicative
+      - QuickCheck
+      - checkers
+      - hspec
 
 tests:
   applicative-test:
     main: Spec.hs
-    source-dirs: test
+    source-dirs: tests
     ghc-options:
       - -threaded
       - -rtsopts
       - -with-rtsopts=-N
     dependencies:
       - applicative
+      - QuickCheck
+      - checkers
+      - hspec

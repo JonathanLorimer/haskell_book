@@ -1,0 +1,57 @@
+name: applicative
+version: 0.1.0.0
+github: "jonathanlorimer/applicative"
+license: BSD3
+author: "Jonathan Lorimer"
+maintainer: "jonathan_lorimer@mac.com"
+copyright: "2019 Jonathan Lorimer"
+
+extra-source-files:
+  - README.md
+  - ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description: Please see the README on GitHub at <https://github.com/jonathanlorimer/applicative#readme>
+
+dependencies:
+  - base >= 4.7 && < 5
+  - QuickCheck
+  - checkers
+  - hspec
+
+library:
+  source-dirs: src
+
+executables:
+  applicative-exe:
+    main: Main.hs
+    source-dirs: app
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - applicative
+      - QuickCheck
+      - checkers
+      - hspec
+
+tests:
+  applicative-test:
+    main: Spec.hs
+    source-dirs: tests
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - applicative
+      - QuickCheck
+      - checkers
+      - hspec

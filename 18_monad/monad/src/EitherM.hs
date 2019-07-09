@@ -1,5 +1,7 @@
 module EitherM where
 
+import Control.Monad
+
 data Other b a = That b
                | This a
 
@@ -16,3 +18,18 @@ instance Monad (Other b) where
     return = pure
     (>>=) (This a) f = f a
     (>>=) (That b) _ = That b
+
+showThis :: Int -> Other Bool String
+showThis a = This (show a)
+
+add10This :: Int -> Other Bool Int
+add10This a = This (a + 10)
+
+f :: Other Bool Int -> Other Bool String 
+f = (>>= showThis)
+
+f' :: Other Bool Int -> Other Bool String 
+f' = join . (fmap showThis)
+
+comp :: Int -> Other Bool String
+comp = add10This >=> showThis

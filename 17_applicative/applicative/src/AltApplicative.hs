@@ -16,7 +16,8 @@ instance AltApplicative.Applicative Basic where
     unit = Basic ()
     pair (Basic a) (Basic b) = Basic (a, b)
     pure a = fmap (const a) unit
-    (<*>) f = fmap (\(f, a) -> f a) . pair f
+    (<*>) (Basic f) = fmap f
+    -- (<*>) f = fmap (\(f, a) -> f a) . pair f
 
 
 data Product a b = Product a b deriving (Show)
@@ -28,7 +29,7 @@ instance Monoid a => AltApplicative.Applicative (Product a) where
     unit = Product mempty ()
     pair (Product a b) (Product a' b') = Product (a `mappend` a') (b, b')
     pure a = fmap (const a) unit
-    (<*>) f = fmap (\(f, a) -> f a) . pair f
+    (<*>) (Product a f) = fmap f
 
 data Sum a b = First a | Second b deriving (Show)
 

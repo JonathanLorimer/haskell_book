@@ -92,6 +92,24 @@ instance Traversable (Pair a) where
 
 data Big a b = Big a b b
 
+instance Functor (Big a) where
+    fmap f (Big a b b') = Big a (f b) (f b')
+
+instance Foldable (Big a) where
+    foldMap f (Big a b b') = (f b) <> (f b')
+
+instance Traversable (Big a) where
+    traverse f (Big a b b')  = (Big a) <$> (f b) <*> (f b') 
+
 -- | 8. Bigger
 
 data Bigger a b = Bigger a b b b
+
+instance Functor (Bigger a) where
+    fmap f (Bigger a b b' b'') = Bigger a (f b) (f b') (f b'')
+
+instance Foldable (Bigger a) where
+    foldMap f (Bigger a b b' b'') = (f b) <> (f b') <> (f b'')
+
+instance Traversable (Bigger a) where
+    traverse f (Bigger a b b' b'')  = (Bigger a) <$> (f b) <*> (f b') <*> (f b'')

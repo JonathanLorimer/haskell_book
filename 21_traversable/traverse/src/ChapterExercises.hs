@@ -113,3 +113,27 @@ instance Foldable (Bigger a) where
 
 instance Traversable (Bigger a) where
     traverse f (Bigger a b b' b'')  = (Bigger a) <$> (f b) <*> (f b') <*> (f b'')
+
+-- | Tree
+
+
+data Tree a = Empty
+            | Leaf a
+            | Node (Tree a) a (Tree a)
+                deriving (Eq, Show)
+
+instance Functor Tree where 
+    fmap _ (Empty) = Empty
+    fmap f (Leaf a) = Leaf (f a)
+    fmap f (Node t a t') = Node (f <$> t) (f a) (f <$> t')
+
+instance Foldable Tree where
+    foldMap _ Empty    = mempty
+    foldMap f (Leaf a) = f a
+    foldMap f (Node t a t') = (foldMap f t) <> (f a) <> (foldMap f t')
+    
+    
+instance Traversable Tree where
+    traverse _ Empty = pure Empty
+    traverse f (Leaf a) = Leaf <$> (f a)
+    traverse f (Node t a t') = Node <$> (traverse f t) <*> (f a) <*> (traverse f t')

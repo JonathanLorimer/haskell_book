@@ -5,6 +5,12 @@ import Test.QuickCheck.Checkers
 
 data S n a = S (n a) a deriving (Eq, Show)
 
+instance Functor n => Functor (S n) where
+    fmap f (S na a) = S (f <$> na) (f a)
+
+instance Foldable (S n) where
+    foldr f z (S na a) = f a z
+
 instance ( Functor n
     , Arbitrary (n a)
     , Arbitrary a )
@@ -19,6 +25,6 @@ instance ( Applicative n
 
 instance Traversable n
     => Traversable (S n) where
-    traverse f (S na a) =  (S <$> (traverse f na)) -- <*> (f a)
-    
-main = sample' (arbitrary :: Gen (S [] Int))
+    traverse f (S na a) = S <$> (traverse f na) <*> (f a)
+
+-- main = sample' (arbitrary :: Gen (S [] Int))

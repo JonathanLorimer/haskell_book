@@ -22,4 +22,17 @@ get = StateM (\s -> (s, s))
 -- | 2.
 put :: s -> StateM s ()
 put s = StateM (\_ -> ((), s))
--- $> runStateM (put "blah") "woot"
+
+-- | 3.
+exec :: StateM s a -> s -> s
+exec (StateM sa) = snd . sa
+
+-- | 4.
+eval :: StateM s a -> s -> a
+eval (StateM sa) = fst . sa
+
+-- | 5.
+modify :: (s -> s) -> StateM s ()
+modify f = StateM (\x -> ((), f x))
+
+-- $> runStateM (modify (+1)) 0

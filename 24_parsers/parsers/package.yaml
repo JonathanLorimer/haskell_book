@@ -1,6 +1,6 @@
-name: parsers
+name: parse
 version: 0.1.0.0
-github: "jonathanlorimer/parsers"
+github: "jonathanlorimer/parse"
 license: BSD3
 author: "Jonathan Lorimer"
 maintainer: "jonathan_lorimer@mac.com"
@@ -17,28 +17,18 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description: Please see the README on GitHub at <https://github.com/jonathanlorimer/parsers#readme>
+description: Please see the README on GitHub at <https://github.com/jonathanlorimer/parse#readme>
 
 dependencies:
   - base >= 4.7 && < 5
   - trifecta
+  - parsers
 
 library:
   source-dirs: src
 
-executables:
-  parsers-exe:
-    main: Main.hs
-    source-dirs: app
-    ghc-options:
-      - -threaded
-      - -rtsopts
-      - -with-rtsopts=-N
-    dependencies:
-      - parsers
-
 tests:
-  parsers-test:
+  parse-test:
     main: Spec.hs
     source-dirs: test
     ghc-options:
@@ -46,4 +36,4 @@ tests:
       - -rtsopts
       - -with-rtsopts=-N
     dependencies:
-      - parsers
+      - parse

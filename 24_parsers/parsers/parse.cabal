@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 9bb7b9ce0bd5a59ab39230035899b1b01b7f27f9a844442986c5ebb8c28d12db
+-- hash: 89d98293d9911ee66214dd653d9fba3533ff423d88fbd3726fbda72e05a2c748
 
 name:           parse
 version:        0.1.0.0
@@ -27,6 +27,7 @@ source-repository head
 
 library
   exposed-modules:
+      ChapterExercises
       IntegerOrDecimal
       LearnParsers
       LearnParsersExercises

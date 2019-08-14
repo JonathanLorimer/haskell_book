@@ -18,27 +18,33 @@ type PError = ParseErrorBundle Text Void
 isInteger :: Parser Char
 isInteger = satisfy isDigit
 
+(<??>) :: MonadParsec e s m => String -> m a -> m a
+(<??>) = flip (<?>)
+
 parseInteger :: Parser Integer
-parseInteger = do
-  space
-  int <- many isInteger
-  space
-  eof
-  return $ read int
+parseInteger =
+  "parseInteger" <??> do
+    space
+    int <- many isInteger
+    space
+    eof
+    return $ read int
 
 parseDecimal :: Parser Rational
-parseDecimal = do
-  numerator <- many isInteger
-  _ <- char '/'
-  denominator <- many isInteger
-  case denominator of
-    "0" -> fail "Denominator cannot be zero"
-    _ -> return $ (read numerator) % (read denominator)
+parseDecimal =
+  "parseDecimal" <??> do
+    numerator <- many isInteger
+    _ <- char '/'
+    denominator <- many isInteger
+    case denominator of
+      "0" -> fail "Denominator cannot be zero"
+      _ -> return $ (read numerator) % (read denominator)
 
 decimalOrInteger :: Parser (Either Rational Integer)
-decimalOrInteger = do
-  p <- eitherP (try parseDecimal) (try parseInteger)
-  return p
+decimalOrInteger =
+  "decimalOrInteger" <??> do
+    p <- eitherP (try parseDecimal) (try parseInteger)
+    return p
 
 parseDorI :: Text -> Either PError (Either Rational Integer)
-parseDorI = runParser decimalOrInteger "<IntegerOrDecimal>"
+parseDorI = runParser decimalOrInteger "<IntegerOrDecimal.hs>"

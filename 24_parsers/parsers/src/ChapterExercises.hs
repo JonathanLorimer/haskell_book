@@ -32,7 +32,7 @@ type Metadata = [NumberOrString]
 
 data SemVer =
   SemVer Major Minor Patch Release Metadata
-  deriving (Eq, Ord, Show)
+  deriving (Eq, Show)
 
 (<??>) :: MonadParsec e s m => String -> m a -> m a
 (<??>) s = flip (<?>) s
@@ -80,3 +80,14 @@ stringToStrNum s =
 
 parseSemVer :: T.Text -> Either PError SemVer
 parseSemVer = runParser semVerParser "parseSemVer"
+
+instance Ord SemVer where
+  compare (SemVer maj min pat _ _) (SemVer maj' min' pat' _ _)
+    | cMaj /= EQ = cMaj
+    | cMin /= EQ = cMin
+    | cPat /= EQ = cPat
+    | otherwise = EQ
+    where
+      cMaj = maj `compare` maj'
+      cMin = min `compare` min'
+      cPat = pat `compare` pat'

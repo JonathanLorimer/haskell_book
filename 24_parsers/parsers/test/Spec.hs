@@ -30,3 +30,16 @@ main =
           parseSemVer "1.0.0-beta+oof.sha.41af286" `shouldBe`
             (Right $
              SemVer 1 0 0 [NOSS "beta"] [NOSS "oof", NOSS "sha", NOSS "41af286"])
+      describe "Ord instance" $ do
+        it "1.0.1 should be greater than 1.0.0" $ do
+          let sv1 = SemVer 1 0 1 [] []
+          let sv2 = SemVer 1 0 0 [] []
+          (sv1 `compare` sv2) `shouldBe` GT
+        it "0.99.99 should be greater than 1.0.0" $ do
+          let sv1 = SemVer 0 99 99 [] []
+          let sv2 = SemVer 1 0 0 [] []
+          (sv1 `compare` sv2) `shouldBe` LT
+        it "1.0.0 should be equal to 1.0.0 [NOSS \"alpha\"]" $ do
+          let sv1 = SemVer 1 0 0 [NOSS "alpha"] []
+          let sv2 = SemVer 1 0 0 [] []
+          (sv1 `compare` sv2) `shouldBe` EQ

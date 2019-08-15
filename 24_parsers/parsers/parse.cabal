@@ -1,0 +1,62 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 89d98293d9911ee66214dd653d9fba3533ff423d88fbd3726fbda72e05a2c748
+
+name:           parse
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/jonathanlorimer/parse#readme>
+homepage:       https://github.com/jonathanlorimer/parse#readme
+bug-reports:    https://github.com/jonathanlorimer/parse/issues
+author:         Jonathan Lorimer
+maintainer:     jonathan_lorimer@mac.com
+copyright:      2019 Jonathan Lorimer
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/jonathanlorimer/parse
+
+library
+  exposed-modules:
+      ChapterExercises
+      IntegerOrDecimal
+      LearnParsers
+      LearnParsersExercises
+  other-modules:
+      Paths_parse
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , megaparsec
+    , parsers
+    , text
+    , trifecta
+  default-language: Haskell2010
+
+test-suite parse-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_parse
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , hspec
+    , megaparsec
+    , parse
+    , parsers
+    , text
+    , trifecta
+  default-language: Haskell2010

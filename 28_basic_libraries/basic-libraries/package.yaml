@@ -1,0 +1,51 @@
+name: basic-libraries
+version: 0.1.0.0
+github: "jonathanlorimer/basic-libraries"
+license: BSD3
+author: "Jonathan Lorimer"
+maintainer: "jonathan_lorimer@mac.com"
+copyright: "2019 Jonathan Lorimer"
+
+extra-source-files:
+  - README.md
+  - ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description: Please see the README on GitHub at <https://github.com/jonathanlorimer/basic-libraries#readme>
+
+dependencies:
+  - base >= 4.7 && < 5
+  - criterion
+  - containers
+
+library:
+  source-dirs: src
+
+executables:
+  basic-libraries-exe:
+    main: Main.hs
+    source-dirs: app
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      - -O2
+    dependencies:
+      - basic-libraries
+
+tests:
+  basic-libraries-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - basic-libraries
